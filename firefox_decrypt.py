@@ -23,6 +23,7 @@ import logging
 import os
 import sqlite3
 import sys
+from datetime import datetime
 from base64 import b64decode
 from ctypes import c_uint, c_void_p, c_char_p, cast, byref, string_at
 from ctypes import Structure, CDLL
@@ -121,7 +122,7 @@ class SqliteCredentials(Credentials):
     """SQLite credentials backend manager
     """
     def __init__(self, profile):
-        db = profile + "\signons.sqlite"
+        db = os.path.join(profile, "signons.sqlite")
 
         super(SqliteCredentials, self).__init__(db)
 
@@ -702,12 +703,7 @@ def main():
     isHttpOnly
     python /home/daniel/python/cookie_viewer.py $(find /home/daniel/ -type f -name 'cookies.sqlite' | head -1) /tmp/test.txt 
 '''
- 
-import sys
-import os
-from datetime import datetime
-import sqlite3
- 
+  
 def Usage():
     print "{0} cookie-fullpath output-file".format(sys.argv[0])
     sys.exit(1)
