@@ -121,7 +121,7 @@ class SqliteCredentials(Credentials):
     """SQLite credentials backend manager
     """
     def __init__(self, profile):
-        db = profile + "/signons.sqlite"
+        db = profile + "\signons.sqlite"
 
         super(SqliteCredentials, self).__init__(db)
 
@@ -183,7 +183,7 @@ class NSSInteraction(object):
 
         if os.name == "nt":
             nssname = "nss3.dll"
-            firefox = r"c:\Program Files (x86)\Mozilla Firefox"
+            firefox = r"C:\Program Files (x86)\Mozilla Firefox"
             os.environ["PATH"] = ';'.join([os.environ["PATH"], firefox])
             LOG.debug("PATH is now %s", os.environ["PATH"])
 
@@ -612,7 +612,7 @@ def get_profile(basepath, no_interactive, choice, list_profiles):
 def parse_sys_args():
     """Parse command line arguments
     """
-    profile_path = "~/.mozilla/firefox/"
+    profile_path = thepath = os.path.expanduser("~" + "\Appdata\Roaming\Mozilla\Firefox\Profiles")
 
     parser = argparse.ArgumentParser(
         description="Access Firefox/Thunderbird profiles and decrypt existing passwords"
