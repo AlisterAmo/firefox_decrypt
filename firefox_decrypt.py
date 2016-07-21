@@ -23,6 +23,7 @@ import logging
 import os
 import sqlite3
 import sys
+import time
 from base64 import b64decode
 from ctypes import c_uint, c_void_p, c_char_p, cast, byref, string_at
 from ctypes import Structure, CDLL
@@ -612,7 +613,7 @@ def get_profile(basepath, no_interactive, choice, list_profiles):
 def parse_sys_args():
     """Parse command line arguments
     """
-    profile_path = thepath = os.path.expanduser("~" + "\Appdata\Roaming\Mozilla\Firefox\Profiles")
+    profile_path = os.path.expanduser("~" + "\Appdata\Roaming\Mozilla\Firefox")
 
     parser = argparse.ArgumentParser(
         description="Access Firefox/Thunderbird profiles and decrypt existing passwords"
@@ -683,8 +684,12 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+        time.sleep(10)
+
     except KeyboardInterrupt as e:
         print("Quit.")
+        time.sleep(10)
         sys.exit(Exit.KEYBOARD_INTERRUPT)
     except Exit as e:
+        time.sleep(10)
         sys.exit(e.exitcode)
